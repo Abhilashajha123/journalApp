@@ -7,6 +7,7 @@ import com.edigest.journalApp.repository.UserRepo;
 import com.edigest.journalApp.service.UserService;
 import com.edigest.journalApp.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,10 +18,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${app.name}")
+    private String appName;
 
     @Autowired
     private UserRepo userRepo;
@@ -37,6 +42,7 @@ public class UserController {
 
 
     @PutMapping
+
     public ResponseEntity<?> updateUser(@RequestBody User user){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

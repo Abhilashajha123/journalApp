@@ -24,8 +24,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Value("${app.name}")
-    private String appName;
+//    @Value("${app.name}")
+//    private String appName;
 
     @Autowired
     private UserRepo userRepo;
@@ -70,15 +70,12 @@ public class UserController {
     @GetMapping("/greetings")
     public ResponseEntity<?> greetings(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");
         String greeting ="";
-
         if(weatherResponse!=null){
             greeting = ",Weather feels like " + weatherResponse.getCurrent().getFeelslike();
         }
         return new ResponseEntity<>("Hi" + authentication.getName() +  greeting, HttpStatus.OK);
-
     }
 
 }
